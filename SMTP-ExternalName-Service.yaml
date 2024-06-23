@@ -1,0 +1,8 @@
+#SMTP-ExternalName-Service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: smtp-service
+spec:
+  type: ExternalName
+  externalName: email-smtp.ap-northeast-2.amazonaws.com  # SMTP Endpoint

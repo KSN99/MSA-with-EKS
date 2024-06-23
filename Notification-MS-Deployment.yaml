@@ -1,0 +1,32 @@
+# NotificationMicroservice-Deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-microservice
+  labels:
+    app: notification-restapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-restapp
+  template:
+    metadata:
+      labels:
+        app: notification-restapp
+    spec:
+      containers:
+        - name: notification-service
+          image: stacksimplify/kube-notifications-microservice:1.0.0
+          ports:
+            - containerPort: 8096
+          imagePullPolicy: Always
+          env:
+            - name: AWS_MAIL_SERVER_HOST
+              value: "smtp-service"  # SMTP-ExternalName-Servie.yaml 에서 metadata.name 과 일치
+            - name: AWS_MAIL_SERVER_USERNAME
+              value: "AKIAXYKJW3R2Y6EU4GGE"
+            - name: AWS_MAIL_SERVER_PASSWORD
+              value: "BEJ6tbbTcl0uyN7UouFpOflyswn+NARdF4MkImQZVM5c"
+            - name: AWS_MAIL_SERVER_FROM_ADDRESS
+              value: "v1999vvv@gmail.com"  # Eamil will be initiated from here
